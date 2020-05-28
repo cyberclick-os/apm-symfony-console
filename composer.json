@@ -1,0 +1,26 @@
+{
+  "name": "pccomponentes/apm-symfony-console",
+  "description": "Elastic APM for Symfony Console",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Zoilo Mora",
+      "email": "zoilo.mora@pccomponentes.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PcComponentes\\ElasticAPM\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "symfony/console": "^4.4|^5.0",
+    "symfony/event-dispatcher": "^4.4|^5.0",
+    "zoilomora/elastic-apm-agent-php": "^0.1.9"
+  },
+  "require-dev": {
+    "pccomponentes/coding-standard": "^1.0"
+  }
+}
