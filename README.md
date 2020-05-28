@@ -17,8 +17,8 @@ In all cases, an already created instance of [ElasticApmTracer](https://github.c
 ### Service Container (Symfony)
 
 ```yaml
-PcComponentes\ElasticAPM\Symfony\Component\EventDispatcher\EventSubscriber:
-  class: PcComponentes\ElasticAPM\Symfony\Component\EventDispatcher\EventSubscriber
+PcComponentes\ElasticAPM\Symfony\Component\Console\EventSubscriber:
+  class: PcComponentes\ElasticAPM\Symfony\Component\Console\EventSubscriber
   autoconfigure: true
   arguments:
     $elasticApmTracer: '@apm.tracer' # \ZoiloMora\ElasticAPM\ElasticApmTracer instance.

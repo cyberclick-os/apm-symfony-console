@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace PcComponentes\ElasticAPM\Symfony\Component\EventDispatcher;
+namespace PcComponentes\ElasticAPM\Symfony\Component\Console;
 
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
@@ -37,14 +37,14 @@ final class EventSubscriber implements EventSubscriberInterface
 
         $this->transaction = $this->elasticApmTracer->startTransaction(
             $command->getName(),
-            'console'
+            'console',
         );
     }
 
     public function onConsoleTerminateEvent(ConsoleTerminateEvent $event): void
     {
         $this->transaction->stop(
-            (string) $event->getExitCode()
+            (string) $event->getExitCode(),
         );
 
         $this->elasticApmTracer->flush();
@@ -53,11 +53,11 @@ final class EventSubscriber implements EventSubscriberInterface
     public function onConsoleErrorEvent(ConsoleErrorEvent $event): void
     {
         $this->elasticApmTracer->captureException(
-            $event->getError()
+            $event->getError(),
         );
 
         $this->transaction->stop(
-            (string) $event->getExitCode()
+            (string) $event->getExitCode(),
         );
     }
 }
