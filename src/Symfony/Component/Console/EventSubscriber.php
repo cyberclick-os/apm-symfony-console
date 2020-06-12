@@ -70,6 +70,8 @@ final class EventSubscriber implements EventSubscriberInterface
             return;
         }
 
+        unset($this->transactions[$key]);
+
         $this->elasticApmTracer->flush();
     }
 
