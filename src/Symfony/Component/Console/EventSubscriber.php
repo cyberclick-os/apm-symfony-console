@@ -36,6 +36,10 @@ final class EventSubscriber implements EventSubscriberInterface
 
     public function onConsoleCommandEvent(ConsoleCommandEvent $event): void
     {
+        if (false === $this->elasticApmTracer->active()) {
+            return;
+        }
+
         $command = $event->getCommand();
         $key = $this->transactionKey($command);
 
@@ -54,6 +58,10 @@ final class EventSubscriber implements EventSubscriberInterface
 
     public function onConsoleTerminateEvent(ConsoleTerminateEvent $event): void
     {
+        if (false === $this->elasticApmTracer->active()) {
+            return;
+        }
+
         $key = $this->transactionKey(
             $event->getCommand(),
         );
@@ -77,6 +85,10 @@ final class EventSubscriber implements EventSubscriberInterface
 
     public function onConsoleErrorEvent(ConsoleErrorEvent $event): void
     {
+        if (false === $this->elasticApmTracer->active()) {
+            return;
+        }
+
         $this->elasticApmTracer->captureException(
             $event->getError(),
         );
