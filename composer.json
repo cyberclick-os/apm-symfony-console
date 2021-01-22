@@ -15,7 +15,7 @@
     }
   },
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 | ^8.0",
     "symfony/console": "^4.4|^5.0",
     "symfony/event-dispatcher": "^4.4|^5.0",
     "zoilomora/elastic-apm-agent-php": "^0.1"
