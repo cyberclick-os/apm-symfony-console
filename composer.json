@@ -1,5 +1,5 @@
 {
-  "name": "pccomponentes/apm-symfony-console",
+  "name": "cyberclick/apm-symfony-console",
   "description": "Elastic APM for Symfony Console",
   "license": "MIT",
   "type": "library",
