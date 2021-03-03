@@ -9,6 +9,7 @@ use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Throwable;
 use ZoiloMora\ElasticAPM\ElasticApmTracer;
 
 final class EventSubscriber implements EventSubscriberInterface
@@ -41,17 +42,24 @@ final class EventSubscriber implements EventSubscriberInterface
         }
 
         $command = $event->getCommand();
+        $input = $event->getInput();
+        $queueArgument = '';
+        try {
+            $queueArgument = ' '.$input->getArgument('queue');
+        } catch (Throwable){
+
+        }
         $key = $this->transactionKey($command);
 
         if (0 !== \count($this->transactions)) {
             $this->spans[$key] = $this->elasticApmTracer->startSpan(
-                $command->getName(),
+                $command->getName(). $queueArgument,
                 'console',
             );
         }
 
         $this->transactions[$key] = $this->elasticApmTracer->startTransaction(
-            $command->getName(),
+            $command->getName(). $queueArgument,
             'console',
         );
     }
