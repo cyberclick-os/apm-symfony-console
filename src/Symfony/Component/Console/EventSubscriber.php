@@ -42,6 +42,11 @@ final class EventSubscriber implements EventSubscriberInterface
         }
 
         $command = $event->getCommand();
+
+        if(str_contains($command->getName(), 'rabbitmq:consume')){
+            return;
+        }
+
         $input = $event->getInput();
         $queueArgument = '';
         try {
@@ -67,6 +72,10 @@ final class EventSubscriber implements EventSubscriberInterface
     public function onConsoleTerminateEvent(ConsoleTerminateEvent $event): void
     {
         if (false === $this->elasticApmTracer->active()) {
+            return;
+        }
+
+        if(str_contains($command->getName(), 'rabbitmq:consume')){
             return;
         }
 
