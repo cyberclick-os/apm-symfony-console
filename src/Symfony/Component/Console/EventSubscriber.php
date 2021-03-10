@@ -75,6 +75,8 @@ final class EventSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $command = $event->getCommand();
+
         if(str_contains($command->getName(), 'rabbitmq:consume')){
             return;
         }
