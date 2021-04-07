@@ -108,6 +108,10 @@ final class EventSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if(str_contains($command->getName(), 'rabbitmq:consume')){
+            return;
+        }
+
         $this->elasticApmTracer->captureException(
             $event->getError(),
         );
