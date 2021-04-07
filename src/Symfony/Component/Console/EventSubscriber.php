@@ -107,10 +107,11 @@ final class EventSubscriber implements EventSubscriberInterface
         if (false === $this->elasticApmTracer->active()) {
             return;
         }
-
-        if(str_contains($command->getName(), 'rabbitmq:consume')){
+        
+        if(str_contains($event->getCommand()->getName(), 'rabbitmq:consume')){
             return;
         }
+
 
         $this->elasticApmTracer->captureException(
             $event->getError(),
